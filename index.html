@@ -496,6 +496,123 @@
       </section>
     </main>
 
+    <section class="untold">
+  <h2>Your Words Untold</h2>
+  <p>it can, not make sense</p>
+
+  <form
+    id="thoughtForm"
+    action="PASTE_YOUR_APPS_SCRIPT_URL_HERE"
+    method="POST"
+    target="submissionFrame"
+  >
+    <textarea
+      name="thought"
+      id="thought"
+      maxlength="5000"
+      placeholder="Write what your heart cannot keep..."
+      required
+    ></textarea>
+
+    <button type="submit" aria-label="Submit your thoughts">
+      ♥
+    </button>
+  </form>
+
+  <iframe
+    name="submissionFrame"
+    id="submissionFrame"
+    title="Submission response"
+    style="display:none"
+  ></iframe>
+
+  <p id="status" role="status" aria-live="polite"></p>
+</section>
+
+<style>
+.untold {
+  background: #f4efe6;
+  color: #39352f;
+  padding: 40px 20px;
+  text-align: center;
+  font-family: Georgia, serif;
+}
+
+.untold h2 {
+  font-size: 30px;
+  font-weight: normal;
+}
+
+.untold p {
+  color: #8b8174;
+  font-size: 14px;
+}
+
+.untold textarea {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 500px;
+  min-height: 160px;
+  margin: 25px auto;
+  padding: 15px;
+  background: #fcfaf6;
+  color: #39352f;
+  border: 1px solid #d9d0c3;
+  border-radius: 8px;
+  resize: vertical;
+  font: 15px Georgia, serif;
+}
+
+.untold button {
+  width: 56px;
+  height: 56px;
+  border: 0;
+  border-radius: 50%;
+  background: #8b5558;
+  color: white;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.untold button:hover {
+  background: #704044;
+}
+
+.untold button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+</style>
+
+<script>
+const form = document.getElementById("thoughtForm");
+const frame = document.getElementById("submissionFrame");
+const statusText = document.getElementById("status");
+let waitingForResponse = false;
+
+frame.addEventListener("load", () => {
+  if (!waitingForResponse) return;
+
+  waitingForResponse = false;
+  statusText.textContent =
+    "Your words have found a home. ♡";
+  form.reset();
+  form.querySelector("button").disabled = false;
+});
+
+form.addEventListener("submit", (event) => {
+  if (!form.reportValidity()) {
+    event.preventDefault();
+    return;
+  }
+
+  waitingForResponse = true;
+  form.querySelector("button").disabled = true;
+  statusText.textContent = "Sending your words...";
+});
+</script>
+
     <!-- FOOTER -->
     <footer class="footer">
       <span>hooddreams © <span id="year"></span></span>
