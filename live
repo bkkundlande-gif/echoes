@@ -1,0 +1,615 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>untitled. — poetry & thoughts</title>
+  <meta name="description" content="A quiet place for poetry, quotes, and the things we cannot say.">
+
+  <meta name="theme-color" content="#f9f8f5">
+
+  <!-- Expressive serif typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+
+  <style>
+    /* =================================
+       1. DESIGN SETTINGS
+       Change these values to customize
+       the look of your website.
+    ================================== */
+
+    :root {
+      --paper: #f9f8f5;
+      --ink: #191917;
+      --muted: #77746d;
+      --line: #e7e4dd;
+
+      --serif: "Playfair Display", Georgia, serif;
+      --sans: "DM Sans", Arial, sans-serif;
+
+      --page-width: 760px;
+    }
+
+    /* =================================
+       2. RESET & GENERAL STYLES
+    ================================== */
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--serif);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    ::selection {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    .page {
+      width: min(var(--page-width), calc(100% - 64px));
+      margin-inline: auto;
+    }
+
+    /* =================================
+       3. HEADER & NAVIGATION
+    ================================== */
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 30px 0;
+      border-bottom: 1px solid var(--line);
+      font-family: var(--sans);
+    }
+
+    .logo {
+      font-family: var(--serif);
+      font-size: 23px;
+      letter-spacing: -1px;
+      font-weight: 600;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .nav a {
+      font-size: 10px;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: color 180ms ease;
+    }
+
+    .nav a:hover,
+    .nav a:focus-visible {
+      color: var(--ink);
+    }
+
+    /* =================================
+       4. INTRODUCTION
+    ================================== */
+
+    .intro {
+      padding: 120px 0 105px;
+    }
+
+    .eyebrow,
+    .section-label,
+    .entry-date,
+    .entry-type,
+    .copy-button,
+    .footer {
+      font-family: var(--sans);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-size: 10px;
+    }
+
+    .eyebrow {
+      color: var(--muted);
+      margin: 0 0 30px;
+    }
+
+    .intro h1 {
+      max-width: 650px;
+      font-family: var(--serif);
+      font-size: clamp(44px, 8vw, 76px);
+      line-height: 1.08;
+      font-weight: 400;
+      letter-spacing: -2.5px;
+      margin: 0;
+    }
+
+    .intro h1 em {
+      font-weight: 400;
+    }
+
+    .intro-text {
+      margin: 25px 0 0;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.8;
+      max-width: 400px;
+    }
+
+    .scroll-note {
+      display: inline-block;
+      margin-top: 54px;
+      font-family: var(--sans);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.4px;
+      color: var(--muted);
+    }
+
+    /* =================================
+       5. WRITING COLLECTION
+    ================================== */
+
+    .collection {
+      padding-bottom: 45px;
+    }
+
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 20px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 18px;
+    }
+
+    .section-label {
+      margin: 0;
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    .section-count {
+      font-family: var(--sans);
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .entry {
+      padding: 48px 0 44px;
+      border-bottom: 1px solid var(--line);
+      scroll-margin-top: 90px;
+    }
+
+    .entry-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .entry-date,
+    .entry-type {
+      margin: 0;
+      color: var(--muted);
+      font-size: 9px;
+    }
+
+    .entry h2 {
+      font-family: var(--serif);
+      font-size: clamp(28px, 4vw, 40px);
+      line-height: 1.2;
+      letter-spacing: -0.8px;
+      font-weight: 400;
+      margin: 0 0 22px;
+    }
+
+    .entry-body {
+      font-size: clamp(17px, 2.2vw, 20px);
+      line-height: 1.95;
+      white-space: pre-line;
+      overflow-wrap: anywhere;
+      margin: 0;
+    }
+
+    .entry-body em {
+      font-weight: 400;
+    }
+
+    .entry-signature {
+      font-family: var(--sans);
+      font-size: 11px;
+      color: var(--muted);
+      margin: 25px 0 0;
+    }
+
+    .entry-actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 25px;
+    }
+
+    .copy-button {
+      cursor: pointer;
+      background: transparent;
+      border: 0;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      padding: 7px 0;
+      font-size: 9px;
+      transition: color 180ms ease, border-color 180ms ease;
+    }
+
+    .copy-button:hover,
+    .copy-button:focus-visible {
+      color: var(--ink);
+      border-color: var(--ink);
+    }
+
+    /* =================================
+       6. CLOSING NOTE
+    ================================== */
+
+    .closing {
+      padding: 110px 0 125px;
+    }
+
+    .closing h2 {
+      max-width: 570px;
+      font-size: clamp(34px, 6vw, 56px);
+      line-height: 1.25;
+      letter-spacing: -1.5px;
+      font-weight: 400;
+      margin: 0;
+    }
+
+    .closing p {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.8;
+      margin-top: 20px;
+    }
+
+    /* =================================
+       7. FOOTER
+    ================================== */
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 25px 0 35px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 9px;
+      line-height: 1.8;
+    }
+
+    /* =================================
+       8. MOBILE RESPONSIVENESS
+    ================================== */
+
+    @media (max-width: 600px) {
+      .page {
+        width: calc(100% - 40px);
+      }
+
+      .header {
+        padding: 23px 0;
+      }
+
+      .logo {
+        font-size: 21px;
+      }
+
+      .nav {
+        gap: 14px;
+      }
+
+      .nav a {
+        font-size: 9px;
+        letter-spacing: 0.7px;
+      }
+
+      .intro {
+        padding: 92px 0 78px;
+      }
+
+      .intro h1 {
+        letter-spacing: -1.7px;
+      }
+
+      .intro-text {
+        font-size: 16px;
+      }
+
+      .scroll-note {
+        margin-top: 42px;
+      }
+
+      .entry {
+        padding: 38px 0;
+      }
+
+      .entry h2 {
+        letter-spacing: -0.5px;
+      }
+
+      .closing {
+        padding: 85px 0 95px;
+      }
+
+      .footer {
+        flex-direction: column;
+        gap: 8px;
+      }
+    }
+
+    /* Respect reduced-motion preferences */
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+
+    <!-- HEADER -->
+    <header class="header">
+      <a class="logo" href="#" aria-label="Untitled home">
+        untitled.
+      </a>
+
+      <nav class="nav" aria-label="Main navigation">
+        <a href="#writing">Writing</a>
+        <a href="#about">About</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- INTRODUCTION -->
+      <section class="intro" aria-labelledby="intro-title">
+        <p class="eyebrow">A quiet corner of the internet</p>
+
+        <h1 id="intro-title">
+          i write what<br>
+          i cannot <em>say.</em>
+        </h1>
+
+        <p class="intro-text">
+          little pieces of a life being lived.
+          words for the feelings that have nowhere else to go.
+        </p>
+
+        <a class="scroll-note" href="#writing">
+          ↓ &nbsp; take your time
+        </a>
+      </section>
+
+      <!--
+        YOUR WRITING LIVES BELOW.
+
+        To add a poem or quote:
+        1. Copy one complete article block.
+        2. Paste it before the closing </section>.
+        3. Change its title, writing, category and signature.
+
+        Use <br> for intentional line breaks.
+      -->
+
+      <section class="collection" id="writing" aria-label="Writing collection">
+
+        <div class="section-heading">
+          <h2 class="section-label">Selected writing</h2>
+          <span class="section-count">01 — 04</span>
+        </div>
+
+        <!-- WRITING 01 -->
+        <article class="entry">
+          <div class="entry-meta">
+            <p class="entry-date">01 / A NOTE TO SELF</p>
+            <p class="entry-type">Reflection</p>
+          </div>
+
+          <h2>on becoming</h2>
+
+          <p class="entry-body">i am learning that becoming yourself
+
+sometimes means disappointing
+
+the person everyone expected you to be.
+
+and maybe that is okay.
+
+maybe growing into your own life
+will always mean outgrowing
+someone else's idea of it.</p>
+
+          <p class="entry-signature">— a note to self</p>
+
+          <div class="entry-actions">
+            <button class="copy-button" type="button">Copy writing ↗</button>
+          </div>
+        </article>
+
+        <!-- WRITING 02 -->
+        <article class="entry">
+          <div class="entry-meta">
+            <p class="entry-date">02 / POETRY</p>
+            <p class="entry-type">Becoming</p>
+          </div>
+
+          <h2>somewhere in between</h2>
+
+          <p class="entry-body">somewhere between who i was
+and who i am becoming,
+
+i learned to be gentle
+with the person i am.
+
+not every unfinished thing
+is a failure.
+
+some things are simply
+still finding their shape.</p>
+
+          <p class="entry-signature">— untitled</p>
+
+          <div class="entry-actions">
+            <button class="copy-button" type="button">Copy writing ↗</button>
+          </div>
+        </article>
+
+        <!-- WRITING 03 -->
+        <article class="entry">
+          <div class="entry-meta">
+            <p class="entry-date">03 / A THOUGHT</p>
+            <p class="entry-type">Life</p>
+          </div>
+
+          <h2>quietly, then all at once</h2>
+
+          <p class="entry-body">one day you stop explaining
+why you need the quiet.
+
+you stop apologising
+for changing your mind.
+
+you begin choosing the things
+that let you sleep peacefully.
+
+and without making a sound,
+your life starts to feel like yours.</p>
+
+          <p class="entry-signature">— a thought to keep</p>
+
+          <div class="entry-actions">
+            <button class="copy-button" type="button">Copy writing ↗</button>
+          </div>
+        </article>
+
+        <!-- WRITING 04 -->
+        <article class="entry">
+          <div class="entry-meta">
+            <p class="entry-date">04 / QUOTE</p>
+            <p class="entry-type">Love & life</p>
+          </div>
+
+          <h2>a small reminder</h2>
+
+          <p class="entry-body">you are allowed to build a life
+that looks nothing like
+the one you once imagined.</p>
+
+          <p class="entry-signature">— a reminder</p>
+
+          <div class="entry-actions">
+            <button class="copy-button" type="button">Copy writing ↗</button>
+          </div>
+        </article>
+
+      </section>
+
+      <!-- CLOSING -->
+      <section class="closing" id="about">
+        <p class="eyebrow">Before you leave</p>
+
+        <h2>
+          some things don't need an audience.
+          just somewhere to exist.
+        </h2>
+
+        <p>
+          thank you for being here, even for a little while.
+        </p>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <span>untitled. © <span id="year"></span></span>
+      <span>words, and nothing else.</span>
+    </footer>
+
+  </div>
+
+  <script>
+    // Update the copyright year automatically.
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+    // Copy a piece of writing without copying its button.
+    document.querySelectorAll(".copy-button").forEach((button) => {
+      button.addEventListener("click", async () => {
+        const entry = button.closest(".entry");
+        const title = entry.querySelector("h2").innerText;
+        const body = entry.querySelector(".entry-body").innerText;
+        const signature =
+          entry.querySelector(".entry-signature")?.innerText || "";
+
+        const text = `${title}\n\n${body}\n\n${signature}`;
+
+        try {
+          await navigator.clipboard.writeText(text);
+          button.textContent = "Copied ✓";
+        } catch {
+          // Fallback for browsers that block clipboard access.
+          const textarea = document.createElement("textarea");
+          textarea.value = text;
+          textarea.style.position = "fixed";
+          textarea.style.opacity = "0";
+          document.body.appendChild(textarea);
+          textarea.select();
+
+          try {
+            document.execCommand("copy");
+            button.textContent = "Copied ✓";
+          } catch {
+            button.textContent = "Unable to copy";
+          }
+
+          textarea.remove();
+        }
+
+        setTimeout(() => {
+          button.textContent = "Copy writing ↗";
+        }, 1800);
+      });
+    });
+  </script>
+</body>
+</html>
